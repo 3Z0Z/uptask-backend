@@ -5,11 +5,11 @@ import jakarta.validation.constraints.NotBlank;
 
 public record ProjectDTO(
 
-    @JsonProperty("project_name")
+    @JsonProperty("projectName")
     @NotBlank(message = "Field project_name is required")
     String projectName,
 
-    @JsonProperty("client_name")
+    @JsonProperty("clientName")
     @NotBlank(message = "Field client_name is required")
     String clientName,
 

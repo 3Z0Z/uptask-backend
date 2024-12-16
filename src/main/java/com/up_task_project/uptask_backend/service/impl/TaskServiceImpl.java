@@ -1,10 +1,12 @@
 package com.up_task_project.uptask_backend.service.impl;
 
-import com.up_task_project.uptask_backend.dto.TaskDTO;
+import com.up_task_project.uptask_backend.dto.request.task.UpdateTaskDTO;
+import com.up_task_project.uptask_backend.dto.request.task.CreateTaskDTO;
 import com.up_task_project.uptask_backend.dto.request.UpdateStateTaskDTO;
 import com.up_task_project.uptask_backend.exception.exceptions.ProjectNotFoundException;
 import com.up_task_project.uptask_backend.exception.exceptions.TaskNotFoundException;
 import com.up_task_project.uptask_backend.model.Task;
+import com.up_task_project.uptask_backend.model.enums.TaskStatus;
 import com.up_task_project.uptask_backend.repository.ProjectRepository;
 import com.up_task_project.uptask_backend.repository.TaskRepository;
 import com.up_task_project.uptask_backend.service.TaskService;
@@ -23,13 +25,13 @@ public class TaskServiceImpl implements TaskService {
     private final TaskRepository taskRepository;
 
     @Override
-    public Task createTask(TaskDTO request) {
+    public Task createTask(CreateTaskDTO request) {
         this.validateProjectExistence(request.projectId());
         Task newTask = Task.builder()
             .projectId(request.projectId())
             .name(request.name())
             .description(request.description())
-            .status(request.status())
+            .status(TaskStatus.PENDING)
             .build();
         newTask = this.taskRepository.save(newTask);
         return newTask;
@@ -47,11 +49,10 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Task updateTaskById(String id, String projectId, TaskDTO request) {
+    public Task updateTaskById(String id, String projectId, UpdateTaskDTO request) {
         Task task = this.findTaskByIdAndValidateProject(id, projectId);
         task.setName(request.name());
         task.setDescription(request.description());
-        task.setStatus(request.status());
         task = this.taskRepository.save(task);
         return task;
     }

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es-CO">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirm your email :: UpTask</title>
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .body{
+            padding: 0 10%;
+            margin: 0 auto;
+        }
+        footer{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="body">
+        <h1>Hola, <span th:text="${username}">Username</span></h1>
+        <p>Has creado tu cuenta con UpTask, ya casi esta todo listo, solo debes confirmar tu cuenta</p>
+        <p>Visita el siguiente enlace:</p>
+        <a href="">Confirmar cuenta</a>
+        <p>E ingresa el siguiente código: <b th:text="${code}">código de validación</b></p>
+        <p>Este código expira en 10 minutos.</p>
+    </div>
+    <br>
+    <footer>UpTask</footer>
+</body>
+</html>

@@ -1,12 +1,11 @@
 package com.up_task_project.uptask_backend.exception.controller;
 
-import com.up_task_project.uptask_backend.exception.exceptions.ProjectNotFoundException;
-import com.up_task_project.uptask_backend.exception.exceptions.TaskNotFoundException;
-import com.up_task_project.uptask_backend.exception.exceptions.UnathorizeActionException;
+import com.up_task_project.uptask_backend.exception.exceptions.*;
 import com.up_task_project.uptask_backend.exception.response.ResponseException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
@@ -32,6 +31,31 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(UnathorizeActionException.class)
     public ResponseEntity<ResponseException> handleUnathorizeActionException(UnathorizeActionException e) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ResponseException(e.getMessage()));
+    }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<ResponseException> handleUserNotFoundException(UserNotFoundException e) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ResponseException(e.getMessage()));
+    }
+
+    @ExceptionHandler(UserAlreadyRegisterException.class)
+    public ResponseEntity<ResponseException> handleUserAlreadyRegisterException(UserAlreadyRegisterException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseException(e.getMessage()));
+    }
+
+    @ExceptionHandler(SendEmailException.class)
+    public ResponseEntity<ResponseException> handleSendEmailException(SendEmailException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseException(e.getMessage()));
+    }
+
+    @ExceptionHandler(TokenNotFoundOrExpiredException.class)
+    public ResponseEntity<ResponseException> handleTokenNotFoundOrExpiredException(TokenNotFoundOrExpiredException e) {
+        return ResponseEntity.status(HttpStatus.UPGRADE_REQUIRED).body(new ResponseException(e.getMessage()));
+    }
+
+    @ExceptionHandler(AuthenticationException.class)
+    public ResponseEntity<ResponseException> handleAuthenticationException(AuthenticationException e) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ResponseException(e.getMessage()));
     }
 
