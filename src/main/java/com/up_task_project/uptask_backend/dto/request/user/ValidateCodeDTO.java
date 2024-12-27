@@ -3,7 +3,7 @@ package com.up_task_project.uptask_backend.dto.request.user;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
 
-public record ValidateEmailUserDTO(
+public record ValidateCodeDTO(
 
     @JsonProperty("token")
     @NotBlank(message = "field token is required")

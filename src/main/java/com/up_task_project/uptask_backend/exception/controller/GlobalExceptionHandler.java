@@ -44,6 +44,11 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseException(e.getMessage()));
     }
 
+    @ExceptionHandler(NoCookiesFoundException.class)
+    public ResponseEntity<ResponseException> handleNoCookiesFoundException(NoCookiesFoundException e) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ResponseException(e.getMessage()));
+    }
+
     @ExceptionHandler(SendEmailException.class)
     public ResponseEntity<ResponseException> handleSendEmailException(SendEmailException e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseException(e.getMessage()));

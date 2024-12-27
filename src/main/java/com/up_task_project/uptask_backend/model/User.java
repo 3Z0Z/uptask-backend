@@ -35,6 +35,8 @@ public class User implements UserDetails {
 
     private boolean isEmailConfirmed;
 
+    private boolean isAbleChangePassword;
+
     @CreatedDate
     private LocalDateTime createAt;
 

@@ -21,7 +21,7 @@
         <h1>Hola, <span th:text="${username}">Username</span></h1>
         <p>Has creado tu cuenta con UpTask, ya casi esta todo listo, solo debes confirmar tu cuenta</p>
         <p>Visita el siguiente enlace:</p>
-        <a href="">Confirmar cuenta</a>
+        <a th:href="@{http://localhost:5173/auth/confirm-account(userId=${userId})}">Confirmar cuenta</a>
         <p>E ingresa el siguiente código: <b th:text="${code}">código de validación</b></p>
         <p>Este código expira en 10 minutos.</p>
     </div>
